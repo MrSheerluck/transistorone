@@ -11,5 +11,9 @@
       "pattern": "transistorone.com",
       "custom_domain": true,
     },
+    {
+      "pattern": "www.transistorone.com",
+      "custom_domain": true,
+    },
   ],
 }
