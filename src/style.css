@@ -1,0 +1,659 @@
+/* ------------------------------------------------------------------
+   Transistor One
+   One viewport · dark grey · a living circuit substrate
+------------------------------------------------------------------- */
+
+:root {
+  --void: #08090a;
+  --screen: #171a1b;
+  --nav: #1f2324;
+  --card: #202425;
+  --paper: #f2f3ef;
+  --muted: #9da6a5;
+  --teal: #2b8b94;
+  --teal-deep: #1d4a50;
+  --circuit: #1b3d41;
+  --pad: #28545a;
+  --transistor: #2a6067;
+  --ink: #141718;
+
+  --font: "Albert Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --step-display: clamp(2.75rem, 1rem + 5.6vw, 6rem);
+  --step-lead: clamp(1rem, 0.94rem + 0.28vw, 1.125rem);
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  height: 100svh;
+  flex-direction: column;
+  margin: 0;
+  overflow: hidden;
+  background: var(--void);
+  color: var(--paper);
+  font-family: var(--font);
+  font-size: var(--step-lead);
+  line-height: 1.5;
+  font-kerning: normal;
+}
+
+::selection {
+  background: var(--teal);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 4px;
+}
+
+p,
+blockquote,
+h1 {
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------
+   Framed screen
+------------------------------------------------------------------- */
+
+.screen {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 16px;
+  overflow: hidden;
+  background: var(--screen);
+  border-radius: 20px;
+}
+
+.nav {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  height: 48px;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 20px 0;
+  padding: 0 18px;
+  background: var(--nav);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.nav__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  background: var(--teal);
+  border-radius: 50%;
+}
+
+.brand {
+  position: absolute;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--paper);
+  text-decoration: none;
+  transform: translateX(-50%);
+}
+
+.brand__mark {
+  width: 25px;
+  height: 25px;
+  flex: none;
+}
+
+.brand__word {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.brand__mark .mark__ring,
+.brand__mark .mark__base-lead,
+.brand__mark .mark__base,
+.brand__mark .mark__lead {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+}
+
+.brand__mark .mark__arrow {
+  fill: var(--teal);
+}
+
+.nav__contact {
+  padding: 8px 13px;
+  background: var(--paper);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.nav__contact:hover {
+  background: var(--teal);
+  color: var(--paper);
+}
+
+/* ------------------------------------------------------------------
+   Hero
+------------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 24px 0;
+  text-align: center;
+}
+
+.hero__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #1d2223;
+  border-radius: 999px;
+  color: #b8c2c0;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.hero__title {
+  max-width: 13ch;
+  margin-top: clamp(1.25rem, 3vh, 2rem);
+  font-size: var(--step-display);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+  text-wrap: balance;
+}
+
+.line {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.07em;
+  margin-bottom: -0.07em;
+}
+
+.line > span {
+  display: block;
+}
+
+.hero__lead {
+  max-width: 62ch;
+  margin-top: clamp(1rem, 2.4vh, 1.5rem);
+  color: #c3cbc8;
+  font-size: var(--step-lead);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.btn {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(1.25rem, 3vh, 2rem);
+  padding: 0 22px;
+  background: var(--paper);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 140ms var(--ease-out);
+}
+
+.btn:hover {
+  background: var(--teal);
+  color: var(--paper);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* ------------------------------------------------------------------
+   Note
+------------------------------------------------------------------- */
+
+.note {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  width: min(840px, calc(100% - 40px));
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin: 8px auto 20px;
+  padding: 16px 20px;
+  background: var(--card);
+  border-radius: 14px;
+}
+
+.note blockquote {
+  max-width: 58ch;
+  color: var(--paper);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.note__foot {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.note__foot a {
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.note__foot a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* ------------------------------------------------------------------
+   The circuit substrate
+------------------------------------------------------------------- */
+
+.circuit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 58%;
+  color: var(--circuit);
+  pointer-events: none;
+}
+
+.circuit__wires path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: square;
+  stroke-linejoin: round;
+}
+
+.circuit__pads rect {
+  fill: var(--pad);
+}
+
+.circuit__resistor,
+.circuit__capacitor {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+}
+
+.circuit__resistor {
+  fill: var(--screen);
+}
+
+.circuit__transistor {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.circuit__transistor path {
+  fill: none;
+  stroke: var(--transistor);
+  stroke-width: 2.2;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+}
+
+.circuit__transistor .transistor__arrow {
+  fill: var(--transistor);
+  stroke: none;
+}
+
+.circuit__signals .signal {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 1.8;
+  stroke-linecap: butt;
+  stroke-dasharray: 0.06 0.94;
+  opacity: 0;
+}
+
+.circuit__signals .signal--base {
+  stroke-width: 1.4;
+  stroke-dasharray: 0.035 0.965;
+}
+
+.circuit__signals .signal--audit {
+  stroke-width: 1.3;
+  stroke-dasharray: 0.04 0.96;
+}
+
+/* ------------------------------------------------------------------
+   Load choreography
+------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .nav {
+    opacity: 0;
+    animation: rise 500ms var(--ease-out) 80ms forwards;
+  }
+
+  .hero__status {
+    opacity: 0;
+    translate: 0 8px;
+    animation: rise 500ms var(--ease-out) 160ms forwards;
+  }
+
+  .hero__title .line:nth-child(1) > span {
+    transform: translateY(105%);
+    animation: line-up 800ms var(--ease-out) 220ms forwards;
+  }
+
+  .hero__title .line:nth-child(2) > span {
+    transform: translateY(105%);
+    animation: line-up 800ms var(--ease-out) 300ms forwards;
+  }
+
+  .hero__lead {
+    opacity: 0;
+    translate: 0 10px;
+    animation: rise 600ms var(--ease-out) 420ms forwards;
+  }
+
+  .btn {
+    opacity: 0;
+    translate: 0 8px;
+    animation: rise 500ms var(--ease-out) 520ms forwards;
+  }
+
+  .note {
+    opacity: 0;
+    translate: 0 10px;
+    animation: rise 600ms var(--ease-out) 700ms forwards;
+  }
+
+  .circuit {
+    opacity: 0;
+    animation:
+      fade 1200ms ease 300ms forwards,
+      circuit-drift 18s ease-in-out 1.4s infinite alternate;
+  }
+
+  .circuit__signals .signal--identity {
+    animation: circuit-signal 4s linear 1.4s infinite;
+  }
+
+  .circuit__signals .signal--base {
+    animation: circuit-signal 4s linear 2.8s infinite;
+  }
+
+  .circuit__signals .signal--money {
+    animation: circuit-signal 4s linear 2.9s infinite;
+  }
+
+  .circuit__signals .signal--money-2 {
+    animation: circuit-signal 4s linear 3.4s infinite;
+  }
+
+  .circuit__signals .signal--money-3 {
+    animation: circuit-signal 4s linear 3.9s infinite;
+  }
+
+  .circuit__signals .signal--memory {
+    animation: circuit-signal 4s linear 2.9s infinite;
+  }
+
+  .circuit__signals .signal--audit {
+    animation: circuit-signal 8s linear 3.4s infinite;
+  }
+
+  .circuit__transistor {
+    animation: transistor-breathe 4s ease-in-out infinite;
+  }
+
+  .circuit .transistor__base {
+    animation: gate 4s ease 2.8s infinite;
+  }
+
+  .circuit .transistor__arrow {
+    animation: emit 4s ease 4.3s infinite;
+  }
+}
+
+@keyframes line-up {
+  to {
+    transform: none;
+  }
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes circuit-drift {
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes transistor-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.012);
+  }
+}
+
+@keyframes circuit-signal {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  35% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  36%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes gate {
+  0%,
+  7% {
+    stroke: var(--paper);
+  }
+  8%,
+  100% {
+    stroke: var(--transistor);
+  }
+}
+
+@keyframes emit {
+  0%,
+  7% {
+    fill: var(--paper);
+  }
+  8%,
+  100% {
+    fill: var(--transistor);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Phone
+------------------------------------------------------------------- */
+
+@media (max-width: 760px) {
+  .screen {
+    margin: 8px;
+    border-radius: 16px;
+  }
+
+  .nav {
+    height: 42px;
+    margin: 10px 10px 0;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .brand {
+    gap: 7px;
+  }
+
+  .brand__mark {
+    width: 21px;
+    height: 21px;
+  }
+
+  .brand__word {
+    font-size: 14px;
+  }
+
+  .nav__contact {
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+
+  .hero {
+    padding: 14px 18px 0;
+  }
+
+  .hero__status {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+
+  .hero__title {
+    margin-top: 18px;
+    font-size: 40px;
+  }
+
+  .hero__lead {
+    max-width: 36ch;
+    margin-top: 14px;
+    font-size: 15px;
+  }
+
+  .btn {
+    min-height: 42px;
+    margin-top: 18px;
+    padding: 0 18px;
+    font-size: 13px;
+  }
+
+  .note {
+    width: calc(100% - 20px);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 11px;
+    margin: 6px auto 10px;
+    padding: 13px 14px;
+    border-radius: 12px;
+  }
+
+  .note blockquote {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .note__foot {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .circuit {
+    height: 52%;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 761px) {
+  .hero__title {
+    font-size: clamp(2.75rem, 1rem + 4.5vw, 4.5rem);
+  }
+
+  .hero {
+    padding-top: 10px;
+  }
+
+  .note {
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+}

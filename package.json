@@ -1,0 +1,27 @@
+{
+  "name": "transistorone",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vp dev",
+    "build": "tsc && vp build",
+    "preview": "vp preview",
+    "prepare": "vp config",
+    "deploy": "vp run build && wrangler deploy"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.3",
+    "vite": "catalog:",
+    "vite-plus": "catalog:",
+    "wrangler": "^4.153.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.15.0",
+      "onFail": "download"
+    }
+  }
+}

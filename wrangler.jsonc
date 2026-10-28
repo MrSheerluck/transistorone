@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "transistorone",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "none",
+  },
+  "routes": [
+    {
+      "pattern": "transistorone.com",
+      "custom_domain": true,
+    },
+  ],
+}
